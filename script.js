@@ -1,24 +1,49 @@
-//Criaçaõ das constantes do sons
-
 const sons = {
-    'A' : 'boom.waw',
-    'B' : 'clap.wav',
-    'C' : 'hihat.wav',
-    'D' : 'kick.wav',
-    'E' : 'openhat.wav',
-    'F' : 'ride.wav',
-    'G' : 'snare.wav',
-    'H' : 'tink.wav',
-    'I' : 'tom.wav',
-    
-}
+    'A' : 'boom.wav',
+    'S' : 'clap.wav',
+    'D' : 'hithat.wav',
+    'F' : 'hithat.wav',
+    'G' : 'kick.wav',
+    'H' : 'openhat.wav',
+    'I' : 'ride.wav',
+    'J' : 'snare.wav',
+    'K' : 'tink.wav',
+    'L' : 'tom.wav',
+};
 
-//função para criar uma div para cada tecla
-const criarDiv = (sons) => {
-    div.classList('key');
-    div.textContent = texto;
-}
+const criarDiv = (texto) => {
+    const div = document.createElement('div'); 
+    div.classList.add('key');
+    div.textContent = texto; 
+    div.id = texto;
 
+    // Evento de clique
+    div.addEventListener('click', () => {
+        tocarSom(texto);
+    });
 
-exibir(sons);
-document.getElementById('container')
+    document.getElementById('container').appendChild(div); 
+};
+
+Object.keys(sons).forEach(criarDiv);
+
+const adicionarEfeito = (letra) => {
+    const div = document.getElementById(letra);
+    if (!div) return;
+
+    div.classList.add('active');
+    setTimeout(() => div.classList.remove('active'), 150);
+};
+
+const tocarSom = (letra) => {
+    const som = sons[letra];
+    if (!som) return;
+    const audio = new Audio(`sons/${som}`);
+    audio.play();
+    adicionarEfeito(letra);
+};
+
+document.addEventListener('keydown', (event) => {
+    const letra = event.key.toUpperCase();
+    tocarSom(letra);
+});
