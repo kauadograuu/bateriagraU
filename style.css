@@ -19,8 +19,8 @@ body{
     border: 3px solid blueviolet;
     cursor: pointer;
 }
+
 .key:hover{
     background-color: whitesmoke;
-    color:floralwhite
-
+    color:floralwhite;
 }
